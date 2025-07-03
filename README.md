@@ -130,7 +130,34 @@ Component re-renders when its state changes and it triggers a re-render on all i
 
 
 
+### React Re-conciliation
+React provides us with a declarative way to define UI
+--> In case of JQuery , we manually traverse to the DOM element and make modifications yourself. In React, we just specify how your UI will look like based on some params as simple as state / props 
+For every re-render that happens, React keeps the DOM manipulation as minimal as possible with the help of Reconciliation Algorithm and here let's understand it 
 
+The Reconciliation Algorithm is a set of RULES that allows React to make a call on :
+1. Which part of the DOM tree stays untouched
+2. Which part needs to be broken down and built from scratch 
+3. Which parts need little tweaking so that they are good to go
+
+So, there's this Diffing ALgorithm which compares the difference between the VDOM and the DOM , and only updates specific parts instead of whole UI
+VDOM --> Concept where an ideal / virtual representation of DOM is kept in memory and synced with the real DOM by a library such as ReactDOM . The process is called Reconciliation
+
+Checkout the Rules
+
+Rule 1: 
+While comparing 2 trees, if 2 elements have different types, React will tear down the whole tree below them and build once from scratch 
+
+Rule 2:
+Whenever 2 DOM elements of same type are encountered , React will keep the same underlying DOM and only update the attributes that change
+
+Rule 3:
+If we have 2 Components of same type , React will keep the same component and only update the props passed to it and when render() method is called on that component , a new JSX tree is created on which the diffing algo recurses and compares with the previous result
+
+Rule 4:
+This is related to recursing over children of a DOM Node
+React compares current children with the previous one and generates a mutation whenever there's a difference 
+But in the case of large lists, when things get little complex , the <code>key</code> attribute plays a major role 
 
 
 
