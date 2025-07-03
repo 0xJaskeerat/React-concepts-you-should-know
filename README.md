@@ -105,7 +105,32 @@ But, but React doesn't understand JSX, so we need tools like <code>Babel</code>
 Simple 3 steps involved:
 1. Trigger : 
 2. Render :
-3. Commit : 
+3. Commit :
+
+
+### Why does a React component re-render after the first render? Do we really need re-rendering
+--> Simple answer to why we need re-rendering : To avoid static webapge similar to Earlier internet days
+
+The answer most of us give when asked : When does a React component re-render
+---> Whenever state changes or props passed to it change
+
+Now this answer may look logically correct but is in-accurate
+
+First things first, we need to understand when a Parent component re-renders , all children components re-render as well
+Reason: React assumes all the components are not pure, so to not take any chances React re-renders all the children components as well
+Eg: A child component may be calling an API [ which is a sort of side-effect ] 
+
+The information doesn't mean that the DOM is created from scratch again and again everytime something happens, coz we have really beautiful Optimizations present --> Reconciliation Algorithm, which detects the bare-minimum changes to be made to the actual DOM via Virtual DOM
+
+#### Note: If you still want your child component to not re-render un-necessarily , then maybe make wrap the component with React.memo, which simply tells React that O/P of these component simply depends on props it receives
+
+
+Finally , we understood 
+Component re-renders when its state changes and it triggers a re-render on all its child component, the rendering is itself an optimised process coz of Reconciliation but still we can handle that using React.memo
+
+
+
+
 
 
 
